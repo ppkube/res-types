@@ -86,13 +86,16 @@ const (
 )
 
 type PredictiveUnit struct {
-	Name           *string                                      `protobuf:"bytes,1,req,name=name" json:"name,omitempty"`
-	Children       []*PredictiveUnit                            `protobuf:"bytes,2,rep,name=children" json:"children,omitempty"`
-	Type           *PredictiveUnit_PredictiveUnitType           `protobuf:"varint,3,opt,name=type,enum=seldon.protos.PredictiveUnit_PredictiveUnitType" json:"type,omitempty"`
-	Implementation *PredictiveUnit_PredictiveUnitImplementation `protobuf:"varint,4,opt,name=implementation,enum=seldon.protos.PredictiveUnit_PredictiveUnitImplementation" json:"implementation,omitempty"`
-	Methods        []PredictiveUnit_PredictiveUnitMethod        `protobuf:"varint,5,rep,name=methods,enum=seldon.protos.PredictiveUnit_PredictiveUnitMethod" json:"methods,omitempty"`
-	Endpoint       *Endpoint                                    `protobuf:"bytes,6,opt,name=endpoint" json:"endpoint,omitempty"`
-	Parameters     []*Parameter                                 `protobuf:"bytes,7,rep,name=parameters" json:"parameters,omitempty"`
+	Name     *string           `protobuf:"bytes,1,req,name=name" json:"name,omitempty"`
+	Children []*PredictiveUnit `protobuf:"bytes,2,rep,name=children" json:"children,omitempty"`
+	//Type           *PredictiveUnit_PredictiveUnitType           `protobuf:"varint,3,opt,name=type,enum=seldon.protos.PredictiveUnit_PredictiveUnitType" json:"type,omitempty"`
+	Type *string `protobuf:"bytes,3,opt,name=type" json:"type,omitempty"`
+	//Implementation *PredictiveUnit_PredictiveUnitImplementation `protobuf:"varint,4,opt,name=implementation,enum=seldon.protos.PredictiveUnit_PredictiveUnitImplementation" json:"implementation,omitempty"`
+	Implementation *string `protobuf:"bytes,4,opt,name=implementation" json:"implementation,omitempty"`
+	//Methods        []PredictiveUnit_PredictiveUnitMethod        `protobuf:"varint,5,rep,name=methods,enum=seldon.protos.PredictiveUnit_PredictiveUnitMethod" json:"methods,omitempty"`
+	Methods    []string     `protobuf:"bytes,5,rep,name=methods" json:"methods,omitempty"`
+	Endpoint   *Endpoint    `protobuf:"bytes,6,opt,name=endpoint" json:"endpoint,omitempty"`
+	Parameters []*Parameter `protobuf:"bytes,7,rep,name=parameters" json:"parameters,omitempty"`
 }
 
 type Parameter_ParameterType int32
@@ -106,9 +109,10 @@ const (
 )
 
 type Parameter struct {
-	Name  *string                  `protobuf:"bytes,1,req,name=name" json:"name,omitempty"`
-	Value *string                  `protobuf:"bytes,2,req,name=value" json:"value,omitempty"`
-	Type  *Parameter_ParameterType `protobuf:"varint,3,req,name=type,enum=seldon.protos.Parameter_ParameterType" json:"type,omitempty"`
+	Name  *string `protobuf:"bytes,1,req,name=name" json:"name,omitempty"`
+	Value *string `protobuf:"bytes,2,req,name=value" json:"value,omitempty"`
+	//Type  *Parameter_ParameterType `protobuf:"varint,3,req,name=type,enum=seldon.protos.Parameter_ParameterType" json:"type,omitempty"`
+	Type *string `protobuf:"bytes,3,req,name=type" json:"type,omitempty"`
 }
 
 type Endpoint_EndpointType int32
@@ -128,9 +132,10 @@ var Endpoint_EndpointType_value = map[string]int32{
 }
 
 type Endpoint struct {
-	ServiceHost *string                `protobuf:"bytes,1,opt,name=service_host,json=serviceHost" json:"service_host,omitempty"`
-	ServicePort *int32                 `protobuf:"varint,2,opt,name=service_port,json=servicePort" json:"service_port,omitempty"`
-	Type        *Endpoint_EndpointType `protobuf:"varint,3,opt,name=type,enum=seldon.protos.Endpoint_EndpointType" json:"type,omitempty"`
+	ServiceHost *string `protobuf:"bytes,1,opt,name=service_host,json=serviceHost" json:"service_host,omitempty"`
+	ServicePort *int32  `protobuf:"varint,2,opt,name=service_port,json=servicePort" json:"service_port,omitempty"`
+	//Type        *Endpoint_EndpointType `protobuf:"varint,3,opt,name=type,enum=seldon.protos.Endpoint_EndpointType" json:"type,omitempty"`
+	Type *string `protobuf:"bytes,3,opt,name=type" json:"type,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

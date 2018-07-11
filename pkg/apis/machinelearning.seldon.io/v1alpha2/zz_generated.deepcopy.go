@@ -159,7 +159,7 @@ func (in *Endpoint) DeepCopyInto(out *Endpoint) {
 		if *in == nil {
 			*out = nil
 		} else {
-			*out = new(Endpoint_EndpointType)
+			*out = new(string)
 			**out = **in
 		}
 	}
@@ -202,7 +202,7 @@ func (in *Parameter) DeepCopyInto(out *Parameter) {
 		if *in == nil {
 			*out = nil
 		} else {
-			*out = new(Parameter_ParameterType)
+			*out = new(string)
 			**out = **in
 		}
 	}
@@ -248,7 +248,7 @@ func (in *PredictiveUnit) DeepCopyInto(out *PredictiveUnit) {
 		if *in == nil {
 			*out = nil
 		} else {
-			*out = new(PredictiveUnit_PredictiveUnitType)
+			*out = new(string)
 			**out = **in
 		}
 	}
@@ -257,13 +257,13 @@ func (in *PredictiveUnit) DeepCopyInto(out *PredictiveUnit) {
 		if *in == nil {
 			*out = nil
 		} else {
-			*out = new(PredictiveUnit_PredictiveUnitImplementation)
+			*out = new(string)
 			**out = **in
 		}
 	}
 	if in.Methods != nil {
 		in, out := &in.Methods, &out.Methods
-		*out = make([]PredictiveUnit_PredictiveUnitMethod, len(*in))
+		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}
 	if in.Endpoint != nil {
