@@ -19,22 +19,22 @@ limitations under the License.
 package fake
 
 import (
-	v1 "github.com/ppkube/res-types/pkg/client/clientset/versioned/typed/machinelearning.seldon.io/v1"
+	v1alpha2 "github.com/ppkube/res-types/pkg/client/clientset/versioned/typed/machinelearning.seldon.io/v1alpha2"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )
 
-type FakeMachinelearningV1 struct {
+type FakeMachinelearningV1alpha2 struct {
 	*testing.Fake
 }
 
-func (c *FakeMachinelearningV1) SeldonDeployments(namespace string) v1.SeldonDeploymentInterface {
+func (c *FakeMachinelearningV1alpha2) SeldonDeployments(namespace string) v1alpha2.SeldonDeploymentInterface {
 	return &FakeSeldonDeployments{c, namespace}
 }
 
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
-func (c *FakeMachinelearningV1) RESTClient() rest.Interface {
+func (c *FakeMachinelearningV1alpha2) RESTClient() rest.Interface {
 	var ret *rest.RESTClient
 	return ret
 }

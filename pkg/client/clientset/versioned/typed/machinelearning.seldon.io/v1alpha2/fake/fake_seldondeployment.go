@@ -19,7 +19,7 @@ limitations under the License.
 package fake
 
 import (
-	machinelearning_seldon_io_v1 "github.com/ppkube/res-types/pkg/apis/machinelearning.seldon.io/v1"
+	v1alpha2 "github.com/ppkube/res-types/pkg/apis/machinelearning.seldon.io/v1alpha2"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -30,29 +30,29 @@ import (
 
 // FakeSeldonDeployments implements SeldonDeploymentInterface
 type FakeSeldonDeployments struct {
-	Fake *FakeMachinelearningV1
+	Fake *FakeMachinelearningV1alpha2
 	ns   string
 }
 
-var seldondeploymentsResource = schema.GroupVersionResource{Group: "machinelearning.seldon.io", Version: "v1", Resource: "seldondeployments"}
+var seldondeploymentsResource = schema.GroupVersionResource{Group: "machinelearning.seldon.io", Version: "v1alpha2", Resource: "seldondeployments"}
 
-var seldondeploymentsKind = schema.GroupVersionKind{Group: "machinelearning.seldon.io", Version: "v1", Kind: "SeldonDeployment"}
+var seldondeploymentsKind = schema.GroupVersionKind{Group: "machinelearning.seldon.io", Version: "v1alpha2", Kind: "SeldonDeployment"}
 
 // Get takes name of the seldonDeployment, and returns the corresponding seldonDeployment object, and an error if there is any.
-func (c *FakeSeldonDeployments) Get(name string, options v1.GetOptions) (result *machinelearning_seldon_io_v1.SeldonDeployment, err error) {
+func (c *FakeSeldonDeployments) Get(name string, options v1.GetOptions) (result *v1alpha2.SeldonDeployment, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(seldondeploymentsResource, c.ns, name), &machinelearning_seldon_io_v1.SeldonDeployment{})
+		Invokes(testing.NewGetAction(seldondeploymentsResource, c.ns, name), &v1alpha2.SeldonDeployment{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*machinelearning_seldon_io_v1.SeldonDeployment), err
+	return obj.(*v1alpha2.SeldonDeployment), err
 }
 
 // List takes label and field selectors, and returns the list of SeldonDeployments that match those selectors.
-func (c *FakeSeldonDeployments) List(opts v1.ListOptions) (result *machinelearning_seldon_io_v1.SeldonDeploymentList, err error) {
+func (c *FakeSeldonDeployments) List(opts v1.ListOptions) (result *v1alpha2.SeldonDeploymentList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(seldondeploymentsResource, seldondeploymentsKind, c.ns, opts), &machinelearning_seldon_io_v1.SeldonDeploymentList{})
+		Invokes(testing.NewListAction(seldondeploymentsResource, seldondeploymentsKind, c.ns, opts), &v1alpha2.SeldonDeploymentList{})
 
 	if obj == nil {
 		return nil, err
@@ -62,8 +62,8 @@ func (c *FakeSeldonDeployments) List(opts v1.ListOptions) (result *machinelearni
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &machinelearning_seldon_io_v1.SeldonDeploymentList{}
-	for _, item := range obj.(*machinelearning_seldon_io_v1.SeldonDeploymentList).Items {
+	list := &v1alpha2.SeldonDeploymentList{}
+	for _, item := range obj.(*v1alpha2.SeldonDeploymentList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -79,31 +79,31 @@ func (c *FakeSeldonDeployments) Watch(opts v1.ListOptions) (watch.Interface, err
 }
 
 // Create takes the representation of a seldonDeployment and creates it.  Returns the server's representation of the seldonDeployment, and an error, if there is any.
-func (c *FakeSeldonDeployments) Create(seldonDeployment *machinelearning_seldon_io_v1.SeldonDeployment) (result *machinelearning_seldon_io_v1.SeldonDeployment, err error) {
+func (c *FakeSeldonDeployments) Create(seldonDeployment *v1alpha2.SeldonDeployment) (result *v1alpha2.SeldonDeployment, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(seldondeploymentsResource, c.ns, seldonDeployment), &machinelearning_seldon_io_v1.SeldonDeployment{})
+		Invokes(testing.NewCreateAction(seldondeploymentsResource, c.ns, seldonDeployment), &v1alpha2.SeldonDeployment{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*machinelearning_seldon_io_v1.SeldonDeployment), err
+	return obj.(*v1alpha2.SeldonDeployment), err
 }
 
 // Update takes the representation of a seldonDeployment and updates it. Returns the server's representation of the seldonDeployment, and an error, if there is any.
-func (c *FakeSeldonDeployments) Update(seldonDeployment *machinelearning_seldon_io_v1.SeldonDeployment) (result *machinelearning_seldon_io_v1.SeldonDeployment, err error) {
+func (c *FakeSeldonDeployments) Update(seldonDeployment *v1alpha2.SeldonDeployment) (result *v1alpha2.SeldonDeployment, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(seldondeploymentsResource, c.ns, seldonDeployment), &machinelearning_seldon_io_v1.SeldonDeployment{})
+		Invokes(testing.NewUpdateAction(seldondeploymentsResource, c.ns, seldonDeployment), &v1alpha2.SeldonDeployment{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*machinelearning_seldon_io_v1.SeldonDeployment), err
+	return obj.(*v1alpha2.SeldonDeployment), err
 }
 
 // Delete takes name of the seldonDeployment and deletes it. Returns an error if one occurs.
 func (c *FakeSeldonDeployments) Delete(name string, options *v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(seldondeploymentsResource, c.ns, name), &machinelearning_seldon_io_v1.SeldonDeployment{})
+		Invokes(testing.NewDeleteAction(seldondeploymentsResource, c.ns, name), &v1alpha2.SeldonDeployment{})
 
 	return err
 }
@@ -112,17 +112,17 @@ func (c *FakeSeldonDeployments) Delete(name string, options *v1.DeleteOptions) e
 func (c *FakeSeldonDeployments) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
 	action := testing.NewDeleteCollectionAction(seldondeploymentsResource, c.ns, listOptions)
 
-	_, err := c.Fake.Invokes(action, &machinelearning_seldon_io_v1.SeldonDeploymentList{})
+	_, err := c.Fake.Invokes(action, &v1alpha2.SeldonDeploymentList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched seldonDeployment.
-func (c *FakeSeldonDeployments) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *machinelearning_seldon_io_v1.SeldonDeployment, err error) {
+func (c *FakeSeldonDeployments) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha2.SeldonDeployment, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(seldondeploymentsResource, c.ns, name, data, subresources...), &machinelearning_seldon_io_v1.SeldonDeployment{})
+		Invokes(testing.NewPatchSubresourceAction(seldondeploymentsResource, c.ns, name, data, subresources...), &v1alpha2.SeldonDeployment{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*machinelearning_seldon_io_v1.SeldonDeployment), err
+	return obj.(*v1alpha2.SeldonDeployment), err
 }

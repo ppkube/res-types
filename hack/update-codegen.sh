@@ -10,5 +10,5 @@ CODEGEN_PKG=${CODEGEN_PKG:-$(cd ${SCRIPT_ROOT}; ls -d -1 ./vendor/k8s.io/code-ge
 vendor/k8s.io/code-generator/generate-groups.sh all \
   github.com/ppkube/res-types/pkg/client \
   github.com/ppkube/res-types/pkg/apis \
-  machinelearning.seldon.io:v1 \
+  machinelearning.seldon.io:v1alpha2 \
   --go-header-file ${SCRIPT_ROOT}/hack/custom-boilerplate.go.txt

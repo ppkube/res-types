@@ -20,8 +20,8 @@ package fake
 
 import (
 	clientset "github.com/ppkube/res-types/pkg/client/clientset/versioned"
-	machinelearningv1 "github.com/ppkube/res-types/pkg/client/clientset/versioned/typed/machinelearning.seldon.io/v1"
-	fakemachinelearningv1 "github.com/ppkube/res-types/pkg/client/clientset/versioned/typed/machinelearning.seldon.io/v1/fake"
+	machinelearningv1alpha2 "github.com/ppkube/res-types/pkg/client/clientset/versioned/typed/machinelearning.seldon.io/v1alpha2"
+	fakemachinelearningv1alpha2 "github.com/ppkube/res-types/pkg/client/clientset/versioned/typed/machinelearning.seldon.io/v1alpha2/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -70,12 +70,12 @@ func (c *Clientset) Discovery() discovery.DiscoveryInterface {
 
 var _ clientset.Interface = &Clientset{}
 
-// MachinelearningV1 retrieves the MachinelearningV1Client
-func (c *Clientset) MachinelearningV1() machinelearningv1.MachinelearningV1Interface {
-	return &fakemachinelearningv1.FakeMachinelearningV1{Fake: &c.Fake}
+// MachinelearningV1alpha2 retrieves the MachinelearningV1alpha2Client
+func (c *Clientset) MachinelearningV1alpha2() machinelearningv1alpha2.MachinelearningV1alpha2Interface {
+	return &fakemachinelearningv1alpha2.FakeMachinelearningV1alpha2{Fake: &c.Fake}
 }
 
-// Machinelearning retrieves the MachinelearningV1Client
-func (c *Clientset) Machinelearning() machinelearningv1.MachinelearningV1Interface {
-	return &fakemachinelearningv1.FakeMachinelearningV1{Fake: &c.Fake}
+// Machinelearning retrieves the MachinelearningV1alpha2Client
+func (c *Clientset) Machinelearning() machinelearningv1alpha2.MachinelearningV1alpha2Interface {
+	return &fakemachinelearningv1alpha2.FakeMachinelearningV1alpha2{Fake: &c.Fake}
 }
