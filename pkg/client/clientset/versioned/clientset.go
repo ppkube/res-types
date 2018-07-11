@@ -20,7 +20,7 @@ package versioned
 
 import (
 	glog "github.com/golang/glog"
-	machinelearningv1 "github.com/ppkube/res-types/pkg/client/clientset/versioned/typed/machinelearning.seldon.io/v1"
+	machinelearningv1alpha2 "github.com/ppkube/res-types/pkg/client/clientset/versioned/typed/machinelearning.seldon.io/v1alpha2"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -28,27 +28,27 @@ import (
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
-	MachinelearningV1() machinelearningv1.MachinelearningV1Interface
+	MachinelearningV1alpha2() machinelearningv1alpha2.MachinelearningV1alpha2Interface
 	// Deprecated: please explicitly pick a version if possible.
-	Machinelearning() machinelearningv1.MachinelearningV1Interface
+	Machinelearning() machinelearningv1alpha2.MachinelearningV1alpha2Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	machinelearningV1 *machinelearningv1.MachinelearningV1Client
+	machinelearningV1alpha2 *machinelearningv1alpha2.MachinelearningV1alpha2Client
 }
 
-// MachinelearningV1 retrieves the MachinelearningV1Client
-func (c *Clientset) MachinelearningV1() machinelearningv1.MachinelearningV1Interface {
-	return c.machinelearningV1
+// MachinelearningV1alpha2 retrieves the MachinelearningV1alpha2Client
+func (c *Clientset) MachinelearningV1alpha2() machinelearningv1alpha2.MachinelearningV1alpha2Interface {
+	return c.machinelearningV1alpha2
 }
 
 // Deprecated: Machinelearning retrieves the default version of MachinelearningClient.
 // Please explicitly pick a version.
-func (c *Clientset) Machinelearning() machinelearningv1.MachinelearningV1Interface {
-	return c.machinelearningV1
+func (c *Clientset) Machinelearning() machinelearningv1alpha2.MachinelearningV1alpha2Interface {
+	return c.machinelearningV1alpha2
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -67,7 +67,7 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	}
 	var cs Clientset
 	var err error
-	cs.machinelearningV1, err = machinelearningv1.NewForConfig(&configShallowCopy)
+	cs.machinelearningV1alpha2, err = machinelearningv1alpha2.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 // panics if there is an error in the config.
 func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
-	cs.machinelearningV1 = machinelearningv1.NewForConfigOrDie(c)
+	cs.machinelearningV1alpha2 = machinelearningv1alpha2.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -93,7 +93,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 // New creates a new Clientset for the given RESTClient.
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
-	cs.machinelearningV1 = machinelearningv1.New(c)
+	cs.machinelearningV1alpha2 = machinelearningv1alpha2.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs
